@@ -1,15 +1,16 @@
 module.exports = function(sequelize, DataTypes) {
-    var User = sequelize.define("User", {
+    var Fav = sequelize.define("Fav", {
         username: DataTypes.STRING,
         allowNull: false,
         validate: {
             len: [1]
         },
-        password: DataTypes.STRING,
+        petid: DataTypes.INTEGER,
         allowNull: false,
         validate: {
             len: [1]
         }
     });
-    return User;
+
+    return Fav;
 };

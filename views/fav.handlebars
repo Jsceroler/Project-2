@@ -1,8 +1,31 @@
 Fav Page
 
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h5 class="card-title">User</h5>
+                    <p>
+                        <strong>ID</strong>: {{Fav.id}}</p>
+                    <p>
+                    <p>
+                        <strong>Fav</strong>: {{Fav.username}}</p>
+                    <p>
+                    <p>
+                        <strong>Pet Id</strong>: {{Fav.petid}}</p>
+                    <p>
+                        <a href="/">← Back To Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <a href="/fav"><button id="fav" class="btn btn-primary float-right">Favs</button></a>
 <a href="/"><button id="home" class="btn btn-primary float-right">Home</button></a>
 <a href="/login"><button id="login" class="btn btn-primary float-right">Login</button></a>
 <a href="/register"><button id="reg" class="btn btn-primary float-right">Register</button></a>
 <a href="/detail"><button id="reg" class="btn btn-primary float-right">Detail</button></a>
 <a href="/api/user"><button id="reg" class="btn btn-primary float-right">User API</button></a>
+<a href="/api/fav"><button id="reg" class="btn btn-primary float-right">Fav API</button></a>

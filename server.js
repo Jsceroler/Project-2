@@ -1,9 +1,12 @@
+//Dependencies
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
 
+//require models
 var db = require("./models");
 
+//Express Setup
 var app = express();
 var PORT = process.env.PORT || 3000;
 
@@ -22,9 +25,11 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
-require("./routes/apiRoutes")(app);
+require("./routes/userRoutes")(app);
+require("./routes/favRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
+//Sync
 var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true

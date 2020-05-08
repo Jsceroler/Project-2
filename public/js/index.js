@@ -1,47 +1,47 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
+var $userText = $("#user-text");
+var $userDescription = $("#user-description");
 var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
+var $userList = $("#user-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-    saveExample: function(example) {
+    saveUser: function(user) {
         return $.ajax({
             headers: {
                 "Content-Type": "application/json",
             },
             type: "POST",
-            url: "api/examples",
-            data: JSON.stringify(example),
+            url: "api/users",
+            data: JSON.stringify(user),
         });
     },
-    getExamples: function() {
+    getUsers: function() {
         return $.ajax({
-            url: "api/examples",
+            url: "api/users",
             type: "GET",
         });
     },
-    deleteExample: function(id) {
+    deleteUser: function(id) {
         return $.ajax({
-            url: "api/examples/" + id,
+            url: "api/users/" + id,
             type: "DELETE",
         });
     },
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-    API.getExamples().then(function(data) {
-        var $examples = data.map(function(example) {
+// refreshUsers gets new users from the db and repopulates the list
+var refreshUsers = function() {
+    API.getUsers().then(function(data) {
+        var $users = data.map(function(user) {
             var $a = $("<a>")
-                .text(example.text)
-                .attr("href", "/example/" + example.id);
+                .text(user.text)
+                .attr("href", "/user/" + user.id);
 
             var $li = $("<li>")
                 .attr({
                     class: "list-group-item",
-                    "data-id": example.id,
+                    "data-id": user.id,
                 })
                 .append($a);
 
@@ -54,46 +54,46 @@ var refreshExamples = function() {
             return $li;
         });
 
-        $exampleList.empty();
-        $exampleList.append($examples);
+        $userList.empty();
+        $userList.append($users);
     });
 };
 
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
+// handleFormSubmit is called whenever we submit a new user
+// Save the new user to the db and refresh the list
 var handleFormSubmit = function(event) {
     event.preventDefault();
 
-    var example = {
-        text: $exampleText.val().trim(),
-        description: $exampleDescription.val().trim(),
+    var user = {
+        text: $userText.val().trim(),
+        description: $userDescription.val().trim(),
     };
 
-    if (!(example.text && example.description)) {
-        alert("You must enter an example text and description!");
+    if (!(user.text && user.description)) {
+        alert("You must enter an user text and description!");
         return;
     }
 
-    API.saveExample(example).then(function() {
-        refreshExamples();
+    API.saveUser(user).then(function() {
+        refreshUsers();
     });
 
-    $exampleText.val("");
-    $exampleDescription.val("");
+    $userText.val("");
+    $userDescription.val("");
 };
 
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
+// handleDeleteBtnClick is called when an user's delete button is clicked
+// Remove the user from the db and refresh the list
 var handleDeleteBtnClick = function() {
     var idToDelete = $(this)
         .parent()
         .attr("data-id");
 
-    API.deleteExample(idToDelete).then(function() {
-        refreshExamples();
+    API.deleteUser(idToDelete).then(function() {
+        refreshUsers();
     });
 };
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+$userList.on("click", ".delete", handleDeleteBtnClick);
