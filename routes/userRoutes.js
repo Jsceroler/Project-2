@@ -7,8 +7,8 @@ var db = require("../models");
 module.exports = function(app) {
     // Get all users
     app.get("/api/users/", function(req, res) {
-        db.User.findAll({}).then(function(dbUser) {
-            res.json(dbUser);
+        db.User.findAll({}).then(function(dbUsers) {
+            res.json(dbUsers);
         });
     });
 
@@ -16,7 +16,7 @@ module.exports = function(app) {
     app.post("/api/users", function(req, res) {
         db.User.create({
             username: req.body.username,
-            password: password
+            password: req.body.password
         }).then(function(dbUser) {
             res.json(dbUser);
         });

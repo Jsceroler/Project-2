@@ -1,16 +1,15 @@
 module.exports = function(sequelize, DataTypes) {
     var Fav = sequelize.define("Fav", {
-        username: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            len: [1]
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
-        petid: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-            len: [1]
+        petid: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
+    }, {
+        timestamps: false
     });
-
     return Fav;
 };

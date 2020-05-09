@@ -5,11 +5,17 @@ var db = require("../models");
 
 // Routes
 module.exports = function(app) {
+    // Get all favs
+    app.get("/api/favs/", function(req, res) {
+        db.Fav.findAll({}).then(function(dbUsers) {
+            res.json(dbUsers);
+        });
+    });
     // Create a new fav
     app.post("/api/favs", function(req, res) {
         db.Fav.create({
             where: {
-                id: req.body.id
+                username: username
             },
         }).then(function(dbUser) {
             res.json(dbUser);
@@ -18,7 +24,7 @@ module.exports = function(app) {
 
     // Delete a fav by id
     app.delete("/api/favs/:id", function(req, res) {
-        db.Fav.destroy({ where: { id: req.params.id } }).then(function(
+        db.Fav.destroy({ where: { petid: req.params.id } }).then(function(
             dbUser
         ) {
             res.json(dbUser);
@@ -29,8 +35,8 @@ module.exports = function(app) {
     app.put("/api/favs", function(req, res) {
         db.Fav.update(req.body, {
             where: {
-                id: req.body.id
-            },
+                username: username
+            }
         }).then(function(dbUser) {
             res.json(dbUser);
         });
