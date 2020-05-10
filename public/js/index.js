@@ -1,3 +1,9 @@
+
+
+
+
+
+//------------------------------
 // Get references to page elements
 var $userText = $("#user-text");
 var $userDescription = $("#user-description");

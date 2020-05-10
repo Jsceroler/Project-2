@@ -1,10 +1,12 @@
 Login Page
 
-<form class="clearfix mb-4">
+<form class="login clearfix mb-4">
     <div class="form-group">
-        <input type="text" id="login" placeholder="Login">
-        <input type="text" id="password" placeholder="Password">
-        <button id="submit" class="btn btn-primary float-right">Submit</button>
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter password" name="password" required>
+        <button type="submit" class="btn btn-primary float-right">Submit</button>
     </div>
 </form>
 

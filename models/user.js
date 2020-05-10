@@ -1,7 +1,9 @@
+var bcrypt = require("bcrypt");
+
 module.exports = function(sequelize, DataTypes) {
     var User = sequelize.define("User", {
         id: {
-            primarayKey: true,
+            primaryKey: true,
             type: DataTypes.INTEGER,
             allowNull: false,
             autoIncrement: true
@@ -11,26 +13,28 @@ module.exports = function(sequelize, DataTypes) {
             is: ["^[a-z]+$", "i"],
             allowNull: false,
             required: true
+            min: 4
         },
         password: {
             type: DataTypes.STRING,
             allowNull: false,
             required: true,
-            len: [2, 10]
+            min: 4
         }
     }, {
         timestamps: false
     }
     );
-    return User;
-};
 
-//generate hash
-User.generateHash = function (password) {
+    //generate hash
+    User.generateHash = function (password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
 // checking if password is valid
-User.prototype.validPassword = function (password) {
-    return bcrypt.compareSync(password, this.localPassword);
+    User.prototype.validPassword = function (password) {
+        return bcrypt.compareSync(password, this.localPassword);
+    };
+    return User;
 };
+

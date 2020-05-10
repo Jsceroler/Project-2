@@ -16,6 +16,7 @@ module.exports = function(app) {
     app.get("/login", function(req, res) {
         res.render("login");
     });
+
     // from starter code
     // db.User.findOne({ where: { id: req.params.id } }).then(function(
     //     dbUser
