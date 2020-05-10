@@ -1,19 +1,19 @@
 var db = require("../models");
 
-module.exports = function(app) {
+module.exports = function (app) {
     // Load index page
-    app.get("/", function(req, res) {
-        db.User.findAll({}).then(function(dbUser) {
+    app.get("/", function (req, res) {
+        db.User.findAll({}).then(function (dbUser) {
             res.render("index", {
                 msg: "Welcome!",
                 username: dbUser
             });
         });
-        // res.render("index");
+        res.render("index");
     });
 
     // Load login page
-    app.get("/login", function(req, res) {
+    app.get("/login", function (req, res) {
         res.render("login");
     });
 
@@ -28,7 +28,7 @@ module.exports = function(app) {
     // });
 
     // Load register page and pass in an example by id
-    app.get("/register", function(req, res) {
+    app.get("/register", function (req, res) {
         res.render("register");
     });
 
@@ -43,7 +43,7 @@ module.exports = function(app) {
     // });
 
     // Load detail page and pass in an example by id
-    app.get("/detail", function(req, res) {
+    app.get("/detail", function (req, res) {
         res.render("detail");
     });
 
@@ -58,7 +58,7 @@ module.exports = function(app) {
     // });
 
     // Load fav page and pass in an example by id
-    app.get("/favs", function(req, res) {
+    app.get("/favs", function (req, res) {
         res.render("favs");
     });
 
@@ -72,10 +72,10 @@ module.exports = function(app) {
     //     });
     // });
 
-// Load user page and pass in an example by id
-app.get("/users", function(req, res) {
-    res.render("user");
-});
+    // Load user page and pass in an example by id
+    app.get("/users", function (req, res) {
+        res.render("user");
+    });
 
     //from starter code
     // db.User.findOne({ where: { id: req.params.id } }).then(function(
@@ -88,7 +88,7 @@ app.get("/users", function(req, res) {
     // });
 
     // Render 404 page for any unmatched routes
-    app.get("*", function(req, res) {
+    app.get("*", function (req, res) {
         res.render("404");
     });
 };
