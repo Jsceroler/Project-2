@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             is: ["^[a-z]+$", "i"],
             allowNull: false,
-            required: true
+            required: true,
             min: 4
         },
         password: {
