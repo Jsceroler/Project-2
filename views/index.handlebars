@@ -16,7 +16,7 @@
 <a href="/api/users"><button id="reg" class="btn btn-primary float-right">User API</button></a>
 <a href="/api/favs"><button id="reg" class="btn btn-primary float-right">Fav API</button></a>
 
-<form class="pet-form" method="POST">
+<form class="pet-form" actions="/" method="POST">
     <div class="form-group">
         <label for="animal"><strong>Animal</strong></label>
         <select id="animal" name="animal" class="form-control form-control-lg mb-3">
@@ -31,20 +31,20 @@
     </div>
 </form>
 
-{{#each animal}}
+{{#each animalObj}}
 <div class="card">
-    <img src=${image} class="img-fluid rounded-circle mt-2">
+    <img class="img-fluid rounded-circle mt-2" src={{image}}>
     <div class="card-body">
-        <h3 class="card-title text-center">${animal.name}</h3>
-        <h5 class="card-text text-center">City: ${animal.contact.address.city}</h5>
-        <h6 class="card-text text-center">State: ${animal.contact.address.state}</h6>
+        <h3 class="card-title text-center">{{animals.name}}</h3>
+        <h5 class="card-text text-center">City: {{contact.address.city}}</h5>
+        <h6 class="card-text text-center">State: {{contact.address.state}}</h6>
         <ul class="list-group">
-            <li class="list-group-item">Age: ${animal.age}</li>
-            <li class="list-group-item">Gender: ${animal.gender}</li>
-            <li class="list-group-item">Size: ${animal.size}</li>
-            <li class="list-group-item">Email: ${animal.contact.email}</li>
-            <li class="list-group-item">Phone: ${animal.contact.phone}</li>
-            <li class="list-group-item">Shelter ID: ${animal.organization_id}</li>
+            <li class="list-group-item">Age: {{age}}</li>
+            <li class="list-group-item">Gender: {{gender}}</li>
+            <li class="list-group-item">Size: {{size}}</li>
+            <li class="list-group-item">Email: {{contact.email}}</li>
+            <li class="list-group-item">Phone: {{contact.phone}}</li>
+            <li class="list-group-item">Shelter ID: {{organization_id}}</li>
         </ul>
     </div>
 </div>
