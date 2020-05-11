@@ -74,8 +74,8 @@ function fetchAnimals(params, token) {
         })
         .then((response) => response.json())
         .then((data) => {
-            animalObj = {
-                data
+            return animalObj = {
+                animals: data
             };
         });
 }

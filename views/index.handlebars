@@ -33,18 +33,18 @@
 
 {{#each animalObj}}
 <div class="card">
-    <img class="img-fluid rounded-circle mt-2" src={{image}}>
+    <img class="img-fluid rounded-circle mt-2" src={{animals.image}}>
     <div class="card-body">
         <h3 class="card-title text-center">{{animals.name}}</h3>
-        <h5 class="card-text text-center">City: {{contact.address.city}}</h5>
-        <h6 class="card-text text-center">State: {{contact.address.state}}</h6>
+        <h5 class="card-text text-center">City: {{animals.contact.address.city}}</h5>
+        <h6 class="card-text text-center">State: {{animals.contact.address.state}}</h6>
         <ul class="list-group">
-            <li class="list-group-item">Age: {{age}}</li>
-            <li class="list-group-item">Gender: {{gender}}</li>
-            <li class="list-group-item">Size: {{size}}</li>
-            <li class="list-group-item">Email: {{contact.email}}</li>
-            <li class="list-group-item">Phone: {{contact.phone}}</li>
-            <li class="list-group-item">Shelter ID: {{organization_id}}</li>
+            <li class="list-group-item">Age: {{animals.age}}</li>
+            <li class="list-group-item">Gender: {{animals.gender}}</li>
+            <li class="list-group-item">Size: {{animals.size}}</li>
+            <li class="list-group-item">Email: {{animals.contact.email}}</li>
+            <li class="list-group-item">Phone: {{animals.contact.phone}}</li>
+            <li class="list-group-item">Shelter ID: {{animals.organization_is}}</li>
         </ul>
     </div>
 </div>
