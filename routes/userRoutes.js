@@ -15,6 +15,7 @@ module.exports = function (app) {
         });
     });
 
+
     //Login page
     app.post("/login", function(req, res) {
         db.User.findOne({
@@ -48,6 +49,7 @@ module.exports = function (app) {
                 }
             });
         });
+
     });
 };
 
