@@ -15,9 +15,7 @@ module.exports = function (app) {
     app.post("/api/favs", function (req, res) {
         db.Fav.create({
             where: {
-                username: username,
-                email: email,
-
+                username: username
             },
         }).then(function (dbUser) {
             res.json(dbUser);

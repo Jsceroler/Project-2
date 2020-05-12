@@ -1,22 +1,13 @@
 <div id="home">
-
-
     <div class="container">
         <div class="row">
             <div class="col-8 offset-2">
-                <h1>{{animal}}</h1>
-                <h2>This is our Home/Search Page!</h2>
+                <h3>{{animal}}</h3>
+                <h2>This is our Home Page!</h2>
             </div>
         </div>
     </div>
 </div>
-<a href="/favs"><button id="fav" class="btn btn-primary float-right">Favs</button></a>
-<a href="/"><button id="home" class="btn btn-primary float-right">Home</button></a>
-<a href="/login"><button id="login" class="btn btn-primary float-right">Login</button></a>
-<a href="/register"><button id="reg" class="btn btn-primary float-right">Register</button></a>
-<a href="/detail"><button id="reg" class="btn btn-primary float-right">Detail</button></a>
-<a href="/api/users"><button id="reg" class="btn btn-primary float-right">User API</button></a>
-<a href="/api/favs"><button id="reg" class="btn btn-primary float-right">Fav API</button></a>
 
 <form class="pet-form" actions="/" method="POST">
     <div class="form-group">
@@ -28,7 +19,8 @@
             <option value="rabbit">Rabbit</option>
         </select>
         <label for="zipcode">zipcode:</label>
-        <input type="text" id="zip" name="zip" class="form-control form-control-lg" placeholder="Enter your zipcode" pattern="[0-9]{5}" title="Five digit zip code">
+        <input type="text" id="zip" name="zip" class="form-control form-control-lg" placeholder="Enter your zipcode"
+            pattern="[0-9]{5}" title="Five digit zip code">
         <input type="submit" value="Find" class="btn btn-dark btn-lg btn-block mt-3">
     </div>
 </form>
@@ -46,7 +38,7 @@
             <li class="list-group-item">Size: {{animals.size}}</li>
             <li class="list-group-item">Email: {{animals.contact.email}}</li>
             <li class="list-group-item">Phone: {{animals.contact.phone}}</li>
-            <li class="list-group-item">Shelter ID: {{animals.organization_is}}</li>
+            <li class="list-group-item">Shelter ID: {{animals.organization_id}}</li>
         </ul>
     </div>
 </div>
