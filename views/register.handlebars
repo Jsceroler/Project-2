@@ -1,4 +1,14 @@
 Registration Page
+<form class="register clearfix mb-4" method="POST">
+    <div class="form-group">
+        <label for="username">Username (4 charactes minimum):</label>
+        <input type="text" id="username" placeholder="Enter username" name="username" required>
+        <label for="password">Password (4 characters minimum):</label>
+        <input type="password" id="password" placeholder="Enter password" name="password" required>
+        <button type="regsubmit" class="btn btn-primary float-right">Submit</button>
+    </div>
+</form>
+
 <a href="/favs"><button id="fav" class="btn btn-primary float-right">Favs</button></a>
 <a href="/"><button id="home" class="btn btn-primary float-right">Home</button></a>
 <a href="/login"><button id="login" class="btn btn-primary float-right">Login</button></a>
