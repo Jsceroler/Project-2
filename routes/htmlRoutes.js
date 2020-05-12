@@ -5,12 +5,6 @@ require("dotenv").config();
 module.exports = function (app) {
     // Load index page
     app.get("/", function (req, res) {
-        db.User.findAll({}).then(function (dbUser) {
-            res.render("index", {
-                msg: "Welcome!",
-                username: dbUser
-            });
-        });
         res.render("index");
     });
 
@@ -34,35 +28,21 @@ module.exports = function (app) {
         res.render("favs");
     });
 
-    //from starter code
-    // db.User.findOne({ where: { id: req.params.id } }).then(function(
-    //     dbUser
-    // ) {
-    //     res.render("detail", {
-    //         msg: "detail page",
-    //         user: dbUser
-    //     });
-    // });
-
-    // Load user page and pass in an example by id
-    app.get("/users", function (req, res) {
-        res.render("user");
+    app.post("/", function(req, res) {
+        let animalObj = {};
+        let animalSearch = {
+            animal: req.body.animal,
+            zip: req.body.zip
+        };
+        apiFetch(animalSearch);
+        res.render("index", animalObj);
     });
-
-    //from starter code
-    // db.User.findOne({ where: { id: req.params.id } }).then(function(
-    //     dbUser
-    // ) {
-    //     res.render("detail", {
-    //         msg: "detail page",
-    //         user: dbUser
-    //     });
-    // });
 
     // Render 404 page for any unmatched routes
     app.get("*", function (req, res) {
         res.render("404");
     });
+
 };
 
 function apiFetch(searchParams){
@@ -95,8 +75,8 @@ function fetchAnimals(params, token) {
         })
         .then((response) => response.json())
         .then((data) => {
-            return animalObj = {
-                animals: data
+            animalObj = {
+                data
             };
         });
-}
+} 
