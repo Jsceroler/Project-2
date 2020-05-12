@@ -2,31 +2,33 @@ const db = require("../models");
 const fetch = require("node-fetch");
 require("dotenv").config();
 
-module.exports = function(app) {
+module.exports = function (app) {
     // Load index page
     app.get("/", function(req, res) {
+
         res.render("index");
     });
 
     // Load login page
-    app.get("/login", function(req, res) {
+    app.get("/login", function (req, res) {
         res.render("login");
     });
 
     // Load register page and pass in an example by id
-    app.get("/register", function(req, res) {
+    app.get("/register", function (req, res) {
         res.render("register");
     });
 
     // Load detail page and pass in an example by id
-    app.get("/detail", function(req, res) {
+    app.get("/detail", function (req, res) {
         res.render("detail");
     });
 
     // Load fav page and pass in an example by id
-    app.get("/favs", function(req, res) {
+    app.get("/favs", function (req, res) {
         res.render("favs");
     });
+
 
     app.post("/", function(req, res) {
         let animalObj = {};
@@ -36,10 +38,10 @@ module.exports = function(app) {
         };
         apiFetch(animalSearch);
         res.render("index", animalObj);
-    });
+
 
     // Render 404 page for any unmatched routes
-    app.get("*", function(req, res) {
+    app.get("*", function (req, res) {
         res.render("404");
     });
 };
