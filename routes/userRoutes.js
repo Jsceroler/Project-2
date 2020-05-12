@@ -1,14 +1,14 @@
 // Routes for displaying and saving data to db
 
 // Require models
-var db = require("../models");
-var bcrypt = require("bcrypt");
+const db = require("../models");
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
 //salt round => cost factor controls how much time is needed to calculate a single bCrypt hash. higher cost factor -> more hashing rounds. Salt is a random value, store hash-string, also stores the saltn no less that 12 for production ready code. 
 
 // Routes
 module.exports = function (app) {
-    //Login page
+//Login page
     app.post("/login", function(req, res) {
         db.User.findOne({
             where: {
@@ -20,6 +20,7 @@ module.exports = function (app) {
             } else {
                 bcrypt.compare(req.body.password, user.password, function (err, result) {
                     if (result == true) {
+                        console.log("logged in");
                         res.redirect("/");
                     } else {
                         res.send("Incorrect password");
@@ -37,10 +38,11 @@ module.exports = function (app) {
                 password: hash
             }).then(function(data) {
                 if (data) {
+                    console.log("registered");
                     res.redirect("/");
                 }
             });
         });
-
     });
 };
+

@@ -4,7 +4,7 @@ require("dotenv").config();
 
 module.exports = function (app) {
     // Load index page
-    app.get("/", function (req, res) {
+    app.get("/", function(req, res) {
         res.render("index");
     });
 
@@ -42,8 +42,7 @@ module.exports = function (app) {
     app.get("*", function (req, res) {
         res.render("404");
     });
-
-};
+}
 
 function apiFetch(searchParams){
     let token;
@@ -75,8 +74,9 @@ function fetchAnimals(params, token) {
         })
         .then((response) => response.json())
         .then((data) => {
-            animalObj = {
-                data
+            console.log(data);
+            return animalObj = {
+                animals: data
             };
         });
-} 
+}
