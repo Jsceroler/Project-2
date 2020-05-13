@@ -1,22 +1,25 @@
 //Dependencies
 require("dotenv").config();
-var express = require("express");
-var exphbs = require("express-handlebars");
-var path = require("path");
+const express = require("express");
+const exphbs = require("express-handlebars");
+const path = require("path");
+const session = require("express-session");
+
 
 //require models
-var db = require("./models");
-
+const db = require("./models");
 
 //Express Setup
-var app = express();
-var PORT = process.env.PORT || 3000;
-
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
+
+// Added for session set up
+app.use(session({secret: process.env.SESSIONSECRET, saveUninitialized: true, resave: true}));
 
 // Handlebars
 app.engine(
@@ -31,7 +34,6 @@ app.set("view engine", "handlebars");
 require("./routes/userRoutes")(app);
 require("./routes/favRoutes")(app);
 require("./routes/htmlRoutes")(app);
-
 
 //Sync
 var syncOptions = { force: false };

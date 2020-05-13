@@ -20,7 +20,8 @@ module.exports = function (app) {
             } else {
                 bcrypt.compare(req.body.password, user.password, function (err, result) {
                     if (result == true) {
-                        console.log("logged in");
+                        console.log("logged in as " + req.body.username);
+                        req.session.username = req.body.username;
                         res.redirect("/");
                     } else {
                         res.send("Incorrect password");
@@ -39,6 +40,7 @@ module.exports = function (app) {
             }).then(function(data) {
                 if (data) {
                     console.log("registered");
+                    req.session.username;
                     res.redirect("/");
                 }
             });
