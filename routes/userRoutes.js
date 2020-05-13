@@ -45,7 +45,7 @@ module.exports = function (app) {
                     req.session.username;
                     res.render("index", {
                         message: "Registered! You are now logged in as: ",
-                        username: req.session.username
+                        username: req.body.username
                     });
                 }
             });

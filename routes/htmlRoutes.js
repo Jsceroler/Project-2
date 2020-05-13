@@ -25,9 +25,9 @@ module.exports = function(app) {
 // Load register page 
     app.get("/register", function (req, res) {
         if (req.session.username) {
-            console.log("already logged in");
+            res.render("index", {message: "You are already logged in! If you want to create a new account please log out first."})
         } else {
-            res.render("register");
+            res.render("register", {message: "Please enter a username and password you would like to use"});
         }
     });
 
