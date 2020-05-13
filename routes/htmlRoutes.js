@@ -53,13 +53,14 @@ module.exports = function(app) {
     app.post("/", function(req, res) {
         let animalSearch = {
             animal: req.body.animal,
-            size: req.body.size,
-            gender: req.body.gender,
-            age: req.body.age,
-            coat: req.body.coat,
-            good_with_children: req.body.good_with_children,
-            good_with_dogs: req.body.good_with_dogs,
-            good_with_cats: req.body.good_with_cats,
+            // key value set up for the other search params
+            // size: req.body.size,
+            // gender: req.body.gender,
+            // age: req.body.age,
+            // coat: req.body.coat,
+            // good_with_children: req.body.good_with_children,
+            // good_with_dogs: req.body.good_with_dogs,
+            // good_with_cats: req.body.good_with_cats,
             zip: req.body.zip
         };
         apiFetch(animalSearch).then((animalObj) => {
@@ -96,6 +97,8 @@ function fetchAnimals(params, token) {
     // get data using the token
     return fetch(
         `https://api.petfinder.com/v2/animals/?type=${params.animal}&location=${params.zip}`,
+        // search query URL that will use all the params
+        // `https://api.petfinder.com/v2/animals/?type=${params.animal}&size=${params.size}&gender=${params.gender}&age=${params.age}&coat=${params.coat}&good_with_children=${params.good_with_children}&good_with_dogs=${params.good_with_dogs}&good_with_cats=${params.good_with_cats}&location=${params.zip}`
         {
             headers: {
                 Authorization: `Bearer ${token}`,
