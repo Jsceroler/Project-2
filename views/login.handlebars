@@ -1,4 +1,7 @@
 Login Page
+{{#if error}}
+    <div class="alert alert-danger">{{error}}</div>
+{{/if}}
 
 <form class="login clearfix mb-4" method="POST">
     <div class="form-group">

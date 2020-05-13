@@ -13,9 +13,10 @@ module.exports = function(app) {
     // Load login page
     app.get("/login", function(req, res) {
         if (req.session.username) {
-            res.render("Logged in as " + req.session.username);
+            let username = req.session.username;
+            res.render("index", username);
         } else {
-            res.render("login");
+            res.render("login", "Please log in or register");
         }
     });
 
@@ -52,7 +53,7 @@ module.exports = function(app) {
             good_with_children: req.body.good_with_children,
             good_with_dogs: req.body.good_with_dogs,
             good_with_cats: req.body.good_with_cats,
-            zip: req.body.zip,
+            zip: req.body.zip
         };
         apiFetch(animalSearch).then((animalObj) => {
             res.render("index", { animalObj });

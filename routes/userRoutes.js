@@ -20,11 +20,11 @@ module.exports = function (app) {
             } else {
                 bcrypt.compare(req.body.password, user.password, function (err, result) {
                     if (result == true) {
-                        console.log("logged in as " + req.body.username);
                         req.session.username = req.body.username;
+                        console.log("logged in as " + req.body.username);
                         res.redirect("/");
                     } else {
-                        res.send("Incorrect password");
+                        res.json({success: false});
                     }
                 });
             }
