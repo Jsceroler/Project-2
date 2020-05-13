@@ -1,24 +1,22 @@
 Fav Page
 
-<div class="container">
-    <div class="row">
-        <div class="col-8 offset-2">
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h5 class="card-title">User</h5>
-                    <p>
-                        <strong>ID</strong>: {{Fav.id}}</p>
-                    <p>
-                    <p>
-                        <strong>Fav</strong>: {{Fav.username}}</p>
-                    <p>
-                    <p>
-                        <strong>Pet Id</strong>: {{Fav.petid}}</p>
-                    <p>
-                        <a href="/">← Back To Home</a>
-                </div>
-            </div>
-        </div>
+{{#each animalObj.animals}}
+
+<div class="card">
+    <img class="img-fluid rounded-circle mt-2" src={{photos.[0].full}}>
+    <div class="card-body">
+        <h3 class="card-title text-center">{{name}}</h3>
+        <h5 class="card-text text-center">City: {{contact.address.city}}</h5>
+        <h6 class="card-text text-center">State: {{contact.address.state}}</h6>
+        <ul class="list-group">
+            <li class="list-group-item">Age: {{age}}</li>
+            <li class="list-group-item">Gender: {{gender}}</li>
+            <li class="list-group-item">Size: {{size}}</li>
+            <li class="list-group-item">Email: {{contact.email}}</li>
+            <li class="list-group-item">Phone: {{contact.phone}}</li>
+            <li class="list-group-item">Shelter ID: {{organization_id}}</li>
+        </ul>
     </div>
 </div>
-
+<br>
+{{/each}}
