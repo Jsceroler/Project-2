@@ -13,10 +13,12 @@ module.exports = function(app) {
     // Load login page
     app.get("/login", function (req, res) {
             if (req.session.username) {
-                console.log("Already logged in");
-                res.render("favs");
+                res.render("index", {
+                    message: "Logged in as: ",
+                    username: req.session.username
+                });
             } else {
-                res.render("login")
+                res.render("login", {message: "Please enter your username and password to login."});
             }
         });
 
