@@ -10,24 +10,39 @@ module.exports = function (app) {
 
     // Load login page
     app.get("/login", function (req, res) {
-        res.render("login");
+        if (req.session.username){
+            console.log("Already logged in");
+            res.render("favs");
+        } else {
+            res.render("login")
+        }
     });
 
-    // Load register page and pass in an example by id
+    // Load register page 
     app.get("/register", function (req, res) {
-        res.render("register");
+        if (req.session.username){
+            console.log("already logged in");
+        } else {
+            res.render("register");
+        }
     });
 
-    // Load detail page and pass in an example by id
+    // Load detail page 
     app.get("/detail", function (req, res) {
         res.render("detail");
     });
 
-    // Load fav page and pass in an example by id
+    // Load fav page 
     app.get("/favs", function (req, res) {
-        res.render("favs");
+        if(req.session.username){
+            res.render("favs");
+        }
+        else {
+            res.render("login");
+        }
     });
 
+    // search API for animal
     app.post("/", function(req, res) {
         let animalObj = {};
         let animalSearch = {
