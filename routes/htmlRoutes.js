@@ -31,11 +31,6 @@ module.exports = function(app) {
         }
     });
 
-    // Load detail page 
-    app.get("/detail", function (req, res) {
-        res.render("detail");
-    });
-
     // Load detail page --Leaving this commented out since we probably won't use this--
     // app.get("/detail", function (req, res) {
     //     res.render("detail");
@@ -44,10 +39,12 @@ module.exports = function(app) {
 // Load fav page 
     app.get("/favs", function (req, res) {
         if (req.session.username) {
-            res.render("favs");
+            res.render("favs", { 
+                usernameDisplay: "You are logged in as: " + req.session.username,
+                message: "Display the saved favs, or something saying no favs have been saved."});
         }
         else {
-            res.render("login");
+            res.render("favs", {message: "You are not logged in, if you would like to look at favs please log in"});
         }
     });
 
