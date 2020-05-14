@@ -11,6 +11,9 @@
                 <li><a href="/" class="text-white">Home</a></li>
                 <li><a href="/login" class="text-white">Login</a></li>
                 <li><a href="/register" class="text-white">Register</a></li>
+                <li><a href="/detail" class="text-white">Detail</a></li>
+                <li><a href="/favs" class="text-white">Favorites</a></li>
+
               </ul>
             </div>
           </div>
@@ -19,17 +22,16 @@
       <div class="navbar navbar-dark bg-dark box-shadow">
         <div class="container d-flex justify-content-between">
           <a href="/" class="navbar-brand d-flex align-items-center">
-            <strong>Welcome!</strong>
+            <strong>Welcome {{username}}!</strong>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
         </div>
       </div>
-    </header>
+</header>
 
     <main role="main">
-
       <section class="jumbotron text-center">
         <div class="container">
           <h1 class="jumbotron-heading">Barks and Whiskers</h1>
@@ -76,40 +78,20 @@ I was finally there
 To sit on my throne as the Prince of Bel Air</p>
           <p>
               <form class="pet-form" action="/" method="post">
-    <div class="form-group">
-        <label for="animal"><strong>Animal</strong></label>
-        <select id="animal" name="animal" class="form-control form-control-lg mb-3">
-            <option value="cat">Cat</option>
-            <option value="dog">Dog</option>
-            <option value="bird">Bird</option>
-            <option value="rabbit">Rabbit</option>
-        </select>
-        <label for="zipcode">zipcode:</label>
-        <input type="text" id="zip" name="zip" class="form-control form-control-lg" placeholder="Enter your zipcode"
-            pattern="[0-9]{5}" title="Five digit zip code">
-        <input type="submit" value="Find" class="btn btn-dark btn-lg btn-block mt-3">
-    </div>
+                <div class="form-group">
+                  <label for="animal"><strong>Animal</strong></label>
+                  <select id="animal" name="animal" class="form-control form-control-lg mb-3">
+                    <option value="cat">Cat</option>
+                  <option value="dog">Dog</option>
+                  <option value="bird">Bird</option>
+                  <option value="rabbit">Rabbit</option>
+                  </select>
+                  <label for="zipcode">zipcode:</label>
+                  <input type="text" id="zip" name="zip" class="form-control form-control-lg" placeholder="Enter your zipcode"
+                   pattern="[0-9]{5}" title="Five digit zip code">
+                  <input type="submit" value="Find" class="btn btn-dark btn-lg btn-block mt-3">
+                </div>
               </form>
-              {{#each animalObj.animals}}
-
-            <div class="card">
-            <img class="img-fluid rounded-circle mt-2" src={{photos.[0].full}}>
-            <div class="card-body">
-            <h3 class="card-title text-center">{{name}}</h3>
-             <h5 class="card-text text-center">City: {{contact.address.city}}</h5>
-            <h6 class="card-text text-center">State: {{contact.address.state}}</h6>
-            <ul class="list-group">
-            <li class="list-group-item">Age: {{age}}</li>
-            <li class="list-group-item">Gender: {{gender}}</li>
-            <li class="list-group-item">Size: {{size}}</li>
-            <li class="list-group-item">Email: {{contact.email}}</li>
-            <li class="list-group-item">Phone: {{contact.phone}}</li>
-            <li class="list-group-item">Shelter ID: {{organization_id}}</li>
-            </ul>
-            </div>
-            </div>
-            <br>
-                {{/each}}
           </p>
         </div>
       </section>
