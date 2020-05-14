@@ -2,8 +2,6 @@ const db = require("../models");
 const fetch = require("node-fetch");
 require("dotenv").config();
 
-console.log(process.env);
-
 module.exports = function(app) {
     // Load index page
     app.get("/", function(req, res) {
@@ -48,18 +46,19 @@ module.exports = function(app) {
         }
     });
 
+    //multiple options: size, gender, age, coat
 
     app.post("/", function(req, res) {
         let animalSearch = {
             animal: req.body.animal,
             // key value set up for the other search params
-            // size: req.body.size,
-            // gender: req.body.gender,
-            // age: req.body.age,
-            // coat: req.body.coat,
-            // good_with_children: req.body.good_with_children,
-            // good_with_dogs: req.body.good_with_dogs,
-            // good_with_cats: req.body.good_with_cats,
+            size: valueCheck(req.body.size),
+            gender: valueCheck(req.body.gender),
+            age: valueCheck(req.body.age),
+            coat: valueCheck(req.body.coat),
+            good_with_children: booleanCheck(req.body.good_with_children),
+            good_with_dogs: booleanCheck(req.body.goodwithdogs),
+            good_with_cats: booleanCheck(req.body.goodwithcats),
             zip: req.body.zip
         };
         apiFetch(animalSearch).then((animalObj) => {
@@ -95,9 +94,8 @@ function fetchAnimals(params, token) {
     // fetch pets
     // get data using the token
     return fetch(
-        `https://api.petfinder.com/v2/animals/?type=${params.animal}&location=${params.zip}`,
+        `https://api.petfinder.com/v2/animals/?type=${params.animal}&size=${params.size}&gender=${params.gender}&age=${params.age}&coat=${params.coat}&good_with_children=${params.good_with_children}&good_with_dogs=${params.good_with_dogs}&good_with_cats=${params.good_with_cats}&location=${params.zip}`,
         // search query URL that will use all the params
-        // `https://api.petfinder.com/v2/animals/?type=${params.animal}&size=${params.size}&gender=${params.gender}&age=${params.age}&coat=${params.coat}&good_with_children=${params.good_with_children}&good_with_dogs=${params.good_with_dogs}&good_with_cats=${params.good_with_cats}&location=${params.zip}`
         {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -109,3 +107,21 @@ function fetchAnimals(params, token) {
             return data;
         });
 }
+
+function valueCheck(value){
+    if(typeof(value)==="object"){
+        value = Object.keys(value).map(function(k){return value[k]}).join(",");
+        return value;
+    }
+    else{
+        return value;
+    }
+}
+
+function booleanCheck(value){
+    if(value===undefined){
+        return value = false;
+    }
+    else{ return value};
+}
+
