@@ -2,29 +2,51 @@
     <div class="container">
         <div class="row">
             <div class="col-8 offset-2">
-
+                <h2> {{message}} {{username}}</h2> <br><br>
                 <h2>This is our Home Page!</h2>
             </div>
         </div>
     </div>
 </div>
 
-<form class="pet-form" action="/" method="post">
+<form class="pet-form" actions="/" method="POST">
     <div class="form-group">
-        <label for="animal"><strong>Animal</strong></label>
-        <select id="animal" name="animal" class="form-control form-control-lg mb-3">
+        <label for="animal"><strong>Animal</strong></label><br/>
+        <select id="animal" name="animal" class="form-control form-control-lg mb-3" required>
             <option value="cat">Cat</option>
             <option value="dog">Dog</option>
             <option value="bird">Bird</option>
             <option value="rabbit">Rabbit</option>
-        </select>
-        <label for="zipcode">zipcode:</label>
-        <input type="text" id="zip" name="zip" class="form-control form-control-lg" placeholder="Enter your zipcode"
-            pattern="[0-9]{5}" title="Five digit zip code">
-        <input type="submit" value="Find" class="btn btn-dark btn-lg btn-block mt-3">
+        </select><br/>
+        <label for="size"><strong>Size</strong></label><br/>
+            <input name="size" value="small" type="checkbox"/> Small<br />
+            <input name="size" value="medium" type="checkbox"/> Medium<br />
+            <input name="size" value="large" type="checkbox"/> Large<br /> 
+            <input name="size" value="xlarge" type="checkbox"/> XLarge<br /> 
+        <label for="gender"><strong>Gender</strong></label><br/>
+            <input name="gender" value="female" type="checkbox"/> Female <br/>
+            <input name="gender" value="male" type="checkbox" /> Male <br/>
+            <input name="gender" value="unknown" type="checkbox" value="1"> Unknown <br/>
+        <label for="age"><strong>Age</strong></label><br/>
+            <input name="age" value="baby" type="checkbox"/>Baby<br/>
+            <input name="age" value="young" type="checkbox"/>Young<br/>
+            <input name="age" value="adult" type="checkbox"/>Adult<br/>
+            <input name="age" value="senior" type="checkbox"/>Senior<br/>
+        <label for="coat"><strong>Coat</strong></label><br/>
+            <input name="coat" value="short" type="checkbox"/>Short<br/>
+            <input name="coat" value="medium" type="checkbox"/>Medium<br/>
+            <input name="coat" value="long" type="checkbox"/>Long<br/>
+            <input name="coat" value="wire" type="checkbox"/>Wire<br/>
+            <input name="coat" value="hairless" type="checkbox"/>Hairless<br/>
+            <input name="coat" value="curly" type="checkbox"/>Curly<br/>
+        <input name="goodwithchildren" value="true" type="checkbox"><strong>Good with children</strong><br/>
+        <input name="goodwithdogs" value="true" type="checkbox"><strong>Good with dogs</strong><br/>
+        <input name="goodwithcats" value="true" type="checkbox"><strong>Good with cats</strong><br/>
+        <label for="zipcode">Zipcode:</label><br/>
+        <input type="text" id="zip" name="zip" class="form-control form-control-lg" placeholder="Enter your zipcode" pattern="[0-9]{5}" title="Five digit zip code">
+        <button type="submit" class="btn btn-dark btn-lg btn-block mt-3">
     </div>
 </form>
-
 {{#each animalObj.animals}}
 
 <div class="card">
