@@ -22,9 +22,12 @@ module.exports = function (app) {
                     if (result == true) {
                         console.log("logged in as " + req.body.username);
                         req.session.username = req.body.username;
-                        res.redirect("/");
+                        res.render("index", {
+                            message: "Logged in as: ",
+                            username: req.session.username
+                        });
                     } else {
-                        res.send("Incorrect password");
+                        res.render("login", {message: "The username or password you entered does not match an existing account."});
                     }
                 });
             }
@@ -39,12 +42,13 @@ module.exports = function (app) {
                 password: hash
             }).then(function(data) {
                 if (data) {
-                    console.log("registered");
                     req.session.username;
-                    res.redirect("/");
+                    res.render("index", {
+                        message: "Registered! You are now logged in as: ",
+                        username: req.body.username
+                    });
                 }
             });
         });
     });
 };
-
