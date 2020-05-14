@@ -62,6 +62,7 @@ module.exports = function(app) {
             zip: req.body.zip
         };
         apiFetch(animalSearch).then((animalObj) => {
+            console.log(animalSearch);
             res.render("index", { animalObj });
         });
     });
