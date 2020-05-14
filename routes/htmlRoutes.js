@@ -1,5 +1,6 @@
 const db = require("../models");
 const fetch = require("node-fetch");
+const qs = require("qs");
 require("dotenv").config();
 
 module.exports = function(app) {
@@ -50,19 +51,19 @@ module.exports = function(app) {
 
     app.post("/", function(req, res) {
         let animalSearch = {
-            animal: req.body.animal,
+            type: req.body.animal,
             // key value set up for the other search params
             size: valueCheck(req.body.size),
             gender: valueCheck(req.body.gender),
             age: valueCheck(req.body.age),
             coat: valueCheck(req.body.coat),
-            good_with_children: booleanCheck(req.body.good_with_children),
-            good_with_dogs: booleanCheck(req.body.goodwithdogs),
-            good_with_cats: booleanCheck(req.body.goodwithcats),
-            zip: req.body.zip
+            good_with_children: req.body.good_with_children,
+            good_with_dogs: req.body.goodwithdogs,
+            good_with_cats: req.body.goodwithcats,
+            location: req.body.zip
         };
         apiFetch(animalSearch).then((animalObj) => {
-            console.log(animalSearch);
+            console.log(animalObj);
             res.render("index", { animalObj });
         });
     });
@@ -94,8 +95,10 @@ function apiFetch(searchParams) {
 function fetchAnimals(params, token) {
     // fetch pets
     // get data using the token
+    const query = qs.stringify(params);
+    console.log(query);
     return fetch(
-        `https://api.petfinder.com/v2/animals/?type=${params.animal}&size=${params.size}&gender=${params.gender}&age=${params.age}&coat=${params.coat}&good_with_children=${params.good_with_children}&good_with_dogs=${params.good_with_dogs}&good_with_cats=${params.good_with_cats}&location=${params.zip}`,
+        `https://api.petfinder.com/v2/animals/?${query}`,
         // search query URL that will use all the params
         {
             headers: {
@@ -103,10 +106,7 @@ function fetchAnimals(params, token) {
             },
         }
     )
-        .then((response) => response.json())
-        .then((data) => {
-            return data;
-        });
+        .then((response) => response.json());
 }
 
 function valueCheck(value){
@@ -117,12 +117,5 @@ function valueCheck(value){
     else{
         return value;
     }
-}
-
-function booleanCheck(value){
-    if(value===undefined){
-        return value = false;
-    }
-    else{ return value};
 }
 

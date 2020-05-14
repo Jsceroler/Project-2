@@ -19,6 +19,7 @@
     "mysql2": "^1.6.5",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.3",
+    "qs": "^6.9.4",
     "sequelize": "^5.8.6"
   },
   "devDependencies": {
