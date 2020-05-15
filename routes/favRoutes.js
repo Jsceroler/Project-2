@@ -5,43 +5,32 @@ var db = require("../models");
 
 // Routes
 module.exports = function (app) {
-    // Get all favs
+
     app.get("/favs", function (req, res) {
-        db.Favs.findAll({}).then(function (dbUsers) {
-            res.json(dbUsers);
+        db.Favs.findAll().then(function (dbFavs) {
+            res.json(dbFavs);
         });
     });
 
-    // Create a new fav
-    app.post("/favs", function (req, res) {
-        db.Favs.create({
-            where: {
-                username: username
-            },
-        }).then(function (dbUser) {
-            res.json(dbUser);
-        });
-    });
+    // // Create a new fav
+    // app.post("/favs", function (req, res) {
+    //     db.Favs.create({
+    //         where: {
+    //             username: username
+    //         },
+    //     }).then(function (dbUser) {
+    //         res.json(dbUser);
+    //     });
+    // });
 
-    // Delete a fav by id
-    app.delete("/favs", function (req, res) {
-        db.Favs.destroy({ where: { petid: req.params.id } }).then(function (
-            dbUser
-        ) {
-            res.json(dbUser);
-        });
-    });
-
-    // PUT route for updating favs
-    app.put("/favs", function (req, res) {
-        db.Favs.update(req.body, {
-            where: {
-                username: username
-            }
-        }).then(function (dbUser) {
-            res.json(dbUser);
-        });
-    });
+    // // Delete a fav by id
+    // app.delete("/favs", function (req, res) {
+    //     db.Favs.destroy({ where: { petid: req.params.id } }).then(function (
+    //         dbUser
+    //     ) {
+    //         res.json(dbUser);
+    //     });
+    // });
 };
 
 

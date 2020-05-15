@@ -19,7 +19,11 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Added for session set up
-app.use(session({secret: process.env.SESSIONSECRET, saveUninitialized: true, resave: true}));
+app.use(session({
+    secret: process.env.SESSIONSECRET, 
+    saveUninitialized: false, 
+    resave: true
+}));
 
 // Handlebars
 app.engine(

@@ -6,7 +6,13 @@ require("dotenv").config();
 module.exports = function(app) {
     // Load index page
     app.get("/", function(req, res) {
-        res.render("index");
+        if (req.session.username) {
+            res.render("index", {
+                username: req.session.username
+            });
+        } else {
+            res.render("index");
+        }
     });
 
     // Load login page
@@ -20,6 +26,12 @@ module.exports = function(app) {
                 res.render("login", {message: "Please enter your username and password to login."});
             }
         });
+
+    // Logout
+    app.get("/logout", function(req, res){
+        req.session.destroy();
+        res.redirect("/");
+    });
 
 // Load register page 
     app.get("/register", function (req, res) {

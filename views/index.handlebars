@@ -10,6 +10,7 @@
                     <ul class="list-unstyled">
                         <li><a href="/" class="text-white">Home</a></li>
                         <li><a href="/login" class="text-white">Login</a></li>
+                        <li><a href="/logout" class="text-white">Logout</a></li>
                         <li><a href="/register" class="text-white">Register</a></li>
                         <li><a href="/detail" class="text-white">Detail</a></li>
                         <li><a href="/favs" class="text-white">Favorites</a></li>
@@ -32,16 +33,15 @@
 </header>
 
 <main role="main">
-
     <section class="jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">Barks and Whiskers</h1>
             <img src="public\images\logo.png" alt="Test">
             <p class="lead text-muted">Now, this is a story all about how
-My life got flipped-turned upside down
-And I'd like to take a minute
-Just sit right there
-I'll tell you how I became the prince of a town called Bel Air</p>
+                My life got flipped-turned upside down
+                And I'd like to take a minute
+                Just sit right there
+                I'll tell you how I became the prince of a town called Bel Air</p>
             <p>
             <form class="pet-form" actions="/" method="POST">
                 <div class="form-group">
@@ -94,7 +94,7 @@ I'll tell you how I became the prince of a town called Bel Air</p>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
                         <img class="card-img-top" src={{photos.[0].full}} alt="Card image cap">
-                        <div class="card-body">ß
+                        <div class="card-body">
                             <p class="card-text">
                             <ul class="list-group">
                                 <li class="list-group-item">Age: {{age}}</li>
@@ -107,7 +107,9 @@ I'll tell you how I became the prince of a town called Bel Air</p>
                             </p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a class="btn add-to-favorites-button" data-toggle="tooltip" data-placement="right" title="Add to Favorites"><i class="far fa-star" data-state="false" id={{id}}></i></a>
+                                    <a class="btn add-to-favorites-button" data-toggle="tooltip" data-placement="right"
+                                        title="Add to Favorites"><i class="far fa-star" data-state="false"
+                                            id={{id}}></i></a>
                                     <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                     <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                 </div>
