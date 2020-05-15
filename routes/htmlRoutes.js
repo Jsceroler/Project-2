@@ -1,70 +1,80 @@
 const db = require("../models");
 const fetch = require("node-fetch");
+const qs = require("qs");
 require("dotenv").config();
 
-console.log(process.env);
-
-module.exports = function (app) {
+module.exports = function(app) {
     // Load index page
-    app.get("/", function (req, res) {
+    app.get("/", function(req, res) {
         res.render("index");
     });
 
     // Load login page
     app.get("/login", function (req, res) {
-        if (req.session.username) {
-            console.log("Already logged in");
-            res.render("favs");
-        } else {
-            res.render("login")
-        }
-    });
-
-    // Load register page 
-    app.get("/register", function (req, res) {
-        if (req.session.username) {
-            console.log("already logged in");
-        } else {
-            res.render("register");
-        }
-    });
-
-    // Load detail page 
-    app.get("/detail", function (req, res) {
-        res.render("detail");
-    });
-
-    // Load fav page 
-    app.get("/favs", function (req, res) {
-        if (req.session.username) {
-            res.render("favs");
-        }
-        else {
-            res.render("login");
-        }
-    });
-
-    app.post("/", function (req, res) {
-
-        let animalSearch = {
-            animal: req.body.animal,
-            zip: req.body.zip
-        };
-        apiFetch(animalSearch).then((animalObj) => {
-
-            res.render("index", { animalObj })
+            if (req.session.username) {
+                res.render("index", {
+                    message: "Logged in as: ",
+                    username: req.session.username
+                });
+            } else {
+                res.render("login", {message: "Please enter your username and password to login."});
+            }
         });
 
+// Load register page 
+    app.get("/register", function (req, res) {
+        if (req.session.username) {
+            res.render("index", {message: "You are already logged in! If you want to create a new account please log out first."})
+        } else {
+            res.render("register", {message: "Please enter a username and password you would like to use"});
+        }
+    });
+
+    // Load detail page --Leaving this commented out since we probably won't use this--
+    // app.get("/detail", function (req, res) {
+    //     res.render("detail");
+    // });
+
+// Load fav page 
+    app.get("/favs", function (req, res) {
+        if (req.session.username) {
+            res.render("favs", { 
+                usernameDisplay: "You are logged in as: " + req.session.username,
+                message: "Display the saved favs, or something saying no favs have been saved."});
+        }
+        else {
+            res.render("favs", {message: "You are not logged in, if you would like to look at favs please log in"});
+        }
+    });
+
+    //multiple options: size, gender, age, coat
+
+    app.post("/", function(req, res) {
+        let animalSearch = {
+            type: req.body.animal,
+            // key value set up for the other search params
+            size: valueCheck(req.body.size),
+            gender: valueCheck(req.body.gender),
+            age: valueCheck(req.body.age),
+            coat: valueCheck(req.body.coat),
+            good_with_children: req.body.good_with_children,
+            good_with_dogs: req.body.goodwithdogs,
+            good_with_cats: req.body.goodwithcats,
+            location: req.body.zip
+        };
+        apiFetch(animalSearch).then((animalObj) => {
+            console.log(animalObj);
+            res.render("index", { animalObj });
+        });
     });
 
     // Render 404 page for any unmatched routes
-    app.get("*", function (req, res) {
+    app.get("*", function(req, res) {
         res.render("404");
     });
-}
+};
 
 function apiFetch(searchParams) {
-
     let token;
     //get the token first
     return fetch("https://api.petfinder.com/v2/oauth2/token", {
@@ -85,17 +95,27 @@ function apiFetch(searchParams) {
 function fetchAnimals(params, token) {
     // fetch pets
     // get data using the token
+    const query = qs.stringify(params);
+    console.log(query);
     return fetch(
-        `https://api.petfinder.com/v2/animals/?type=${params.animal}&location=${params.zip}`,
+        `https://api.petfinder.com/v2/animals/?${query}`,
+        // search query URL that will use all the params
         {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            //   console.log(data);
-            return data
-
-        });
+        }
+    )
+        .then((response) => response.json());
 }
+
+function valueCheck(value){
+    if(typeof(value)==="object"){
+        value = Object.keys(value).map(function(k){return value[k]}).join(",");
+        return value;
+    }
+    else{
+        return value;
+    }
+}
+
