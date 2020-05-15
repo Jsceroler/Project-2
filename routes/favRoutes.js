@@ -6,14 +6,15 @@ var db = require("../models");
 // Routes
 module.exports = function (app) {
     // Get all favs
-    app.get("/api/favs/", function (req, res) {
-        db.Fav.findAll({}).then(function (dbUsers) {
+    app.get("/favs", function (req, res) {
+        db.Favs.findAll({}).then(function (dbUsers) {
             res.json(dbUsers);
         });
     });
+
     // Create a new fav
-    app.post("/api/favs", function (req, res) {
-        db.Fav.create({
+    app.post("/favs", function (req, res) {
+        db.Favs.create({
             where: {
                 username: username
             },
@@ -23,8 +24,8 @@ module.exports = function (app) {
     });
 
     // Delete a fav by id
-    app.delete("/api/favs/:id", function (req, res) {
-        db.Fav.destroy({ where: { petid: req.params.id } }).then(function (
+    app.delete("/favs", function (req, res) {
+        db.Favs.destroy({ where: { petid: req.params.id } }).then(function (
             dbUser
         ) {
             res.json(dbUser);
@@ -32,8 +33,8 @@ module.exports = function (app) {
     });
 
     // PUT route for updating favs
-    app.put("/api/favs", function (req, res) {
-        db.Fav.update(req.body, {
+    app.put("/favs", function (req, res) {
+        db.Favs.update(req.body, {
             where: {
                 username: username
             }
@@ -43,4 +44,26 @@ module.exports = function (app) {
     });
 };
 
+
+
+// $(recipeCard).find(".fa-star").click(function() {
+//     $(this).toggleClass("fas far");
+
+//     var IDnum = $(this).attr("data-recipeNum");
+
+//     var state = $(this).attr("data-state");
+//     if (state === "false"){
+//         $(this).attr("data-state", "true");
+//         data.ref().push(IDnum);
+//     }
+//     else {
+//         $(this).attr("data-state", "false");
+//         var favID = $(this).attr("id");
+//         var deleteFav = firebase.database().ref(favID);
+//         deleteFav.remove();
+//         $("#"+IDnum).empty();
+//     }
+// })
+// valueReset();
+// return recipeCard;
 

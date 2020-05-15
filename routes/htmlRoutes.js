@@ -52,7 +52,6 @@ module.exports = function(app) {
     app.post("/", function(req, res) {
         let animalSearch = {
             type: req.body.animal,
-            // key value set up for the other search params
             size: valueCheck(req.body.size),
             gender: valueCheck(req.body.gender),
             age: valueCheck(req.body.age),
@@ -60,7 +59,8 @@ module.exports = function(app) {
             good_with_children: req.body.good_with_children,
             good_with_dogs: req.body.goodwithdogs,
             good_with_cats: req.body.goodwithcats,
-            location: req.body.zip
+            location: req.body.zip,
+            id: req.body.id
         };
         apiFetch(animalSearch).then((animalObj) => {
             console.log(animalObj);
@@ -96,9 +96,8 @@ function fetchAnimals(params, token) {
     // fetch pets
     // get data using the token
     const query = qs.stringify(params);
-    console.log(query);
     return fetch(
-        `https://api.petfinder.com/v2/animals/?${query}`,
+        `https://api.petfinder.com/v2/animals/?${query}&limit=6`,
         // search query URL that will use all the params
         {
             headers: {
