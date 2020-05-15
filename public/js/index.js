@@ -1,19 +1,62 @@
 $(".fa-star").click(function() {
+
     $(this).toggleClass("fas far");
 
-    // var IDnum = $(this).attr("id");
+    let petId = {
+        petId: $(this).attr("id")
+    }
+    
 
-    var state = $(this).attr("data-state");
+    let state = $(this).attr("data-state");
     if (state === "false"){
         $(this).attr("data-state", "true");
-        // data.ref().push(IDnum);
-        // //data-> to mysql db, favs table by session username
+
+        $.ajax("/favs", {
+            type: "POST",
+            data: petId
+        }).then(
+            function(res) {
+            }
+        ).fail(
+            function(err){
+                alert("You need to log in to save as fav");
+                //need to stop the toggle
+            }
+        )
     }
-    else {
-        $(this).attr("data-state", "false");
-        // var favID = $(this).attr("id");
-        // var deleteFav = firebase.database().ref(favID);
-        // // delete from mysql db favs table by session username
-        // deleteFav.remove();
+    // else {
+    //     $(this).attr("data-state", "false");
+
+    //     $.ajax("/favs", {
+    //         type: "DELETE",
+    //         data: petId
+    //     }).then(
+    //         function(res){
+    //         }
+    //     ).fail(
+    //         function(err){
+    //             alert("You need to log in to save as fav");
+    //         }
+    //     )
+
+    // }
+})
+
+$(".delete").click(function() {
+    let deleteId = {
+        deleteId: $(this).attr("id")
     }
+
+    $.ajax("/favs", {
+        type: "DELETE",
+        data: deleteId
+    }).then(
+        function(res){
+            location.reload();
+        }
+    ).fail(
+        function(err){
+            alert("Oops. something broke! Sorry!");
+        }
+    )
 })

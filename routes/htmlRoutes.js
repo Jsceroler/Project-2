@@ -52,13 +52,11 @@ module.exports = function(app) {
     app.get("/favs", function (req, res) {
         if (req.session.username) {
             db.Favs.findAll().then(function (dbFavs) {
-                res.json(dbFavs);
+            res.render("favs", { 
+                usernameDisplay: "You are logged in as: " + req.session.username,
+                favs: dbFavs});
             });
-            // res.render("favs", { 
-            //     usernameDisplay: "You are logged in as: " + req.session.username,
-            //     message: "Display the saved favs, or something saying no favs have been saved."});
-        }
-        else {
+        } else {
             res.render("favs", {message: "You are not logged in, if you would like to look at favs please log in"});
         }
     });

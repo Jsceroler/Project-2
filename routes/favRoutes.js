@@ -2,57 +2,102 @@
 
 // Require models
 var db = require("../models");
-
+const fetch = require("node-fetch");
 // Routes
-module.exports = function (app) {
-
-    app.get("/favs", function (req, res) {
-        db.Favs.findAll().then(function (dbFavs) {
-            res.json(dbFavs);
-        });
+module.exports = function(app) {
+    app.get("/favs", function(req, res) {
+        if (req.session.username) {
+            db.Favs.findAll({
+                where: {
+                    username: req.session.username,
+                },
+            }).then(function(userFavs) {
+                console.log(userFavs);
+                let favResults = [];
+                for (let fav of userFavs) {
+                    favResults.push(apiFetch(fav.petid));
+                }
+                Promise.all(favResults).then(function(savedFav){
+                    console.log(savedFav);
+                    res.render("favs", {
+                        savedFav: savedFav
+                    });
+                })
+                
+            });
+        } else {
+            res.render("favs", {
+                message: "Sorry, you need to be signed in to views favs",
+            });
+        }
     });
 
-    // // Create a new fav
-    // app.post("/favs", function (req, res) {
-    //     db.Favs.create({
-    //         where: {
-    //             username: username
-    //         },
-    //     }).then(function (dbUser) {
-    //         res.json(dbUser);
-    //     });
-    // });
+    app.post("/favs", function(req, res) {
+        // console.log(req.body);
+        let petId = req.body.petId;
+        if (req.session.username) {
+            // console.log("yay fav", petId);
+            db.Favs.create({
+                username: req.session.username,
+                petid: petId,
+            }).then(function() {
+                //database stuff
+                res.status(200).send("200");
+            });
+        } else {
+            res.status(401).send("401");
+            // error 401
+        }
+    });
 
-    // // Delete a fav by id
-    // app.delete("/favs", function (req, res) {
-    //     db.Favs.destroy({ where: { petid: req.params.id } }).then(function (
-    //         dbUser
-    //     ) {
-    //         res.json(dbUser);
-    //     });
-    // });
+    app.delete("/favs", function(req, res) {
+        if (req.session.username) {
+            db.Favs.destroy({
+                where: {
+                    username: req.session.username,
+                    petid: req.body.deleteId
+                }
+            }).then(function(dbFavs){
+                res.json(dbFavs);
+            })
+        } else {
+            res.render("favs", {
+                message: "Sorry, you need to be signed in to views favs",
+            });
+        }
+        
+    } )
 };
 
+function apiFetch(id) {
+    let token;
+    //get the token first
+    return fetch("https://api.petfinder.com/v2/oauth2/token", {
+        body: `grant_type=client_credentials&client_id=${process.env.KEY}&client_secret=${process.env.SECRET}`,
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        method: "POST",
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            token = data.access_token;
+            return fetchAnimals(id, token);
+        });
+}
 
-
-// $(recipeCard).find(".fa-star").click(function() {
-//     $(this).toggleClass("fas far");
-
-//     var IDnum = $(this).attr("data-recipeNum");
-
-//     var state = $(this).attr("data-state");
-//     if (state === "false"){
-//         $(this).attr("data-state", "true");
-//         data.ref().push(IDnum);
-//     }
-//     else {
-//         $(this).attr("data-state", "false");
-//         var favID = $(this).attr("id");
-//         var deleteFav = firebase.database().ref(favID);
-//         deleteFav.remove();
-//         $("#"+IDnum).empty();
-//     }
-// })
-// valueReset();
-// return recipeCard;
-
+// Fetch animals from the API
+function fetchAnimals(id, token) {
+    // console.log("these are the ids ", id);
+    // fetch pets
+    // get data using the token
+    return fetch(
+        `https://api.petfinder.com/v2/animals/${id}`,
+        // search query URL that will use all the params
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    ).then((response) => response.json());
+}
