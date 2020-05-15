@@ -7,6 +7,7 @@ module.exports = function(app) {
     // Load index page
     app.get("/", function(req, res) {
         if (req.session.username) {
+            console.log(req.session.username);
             res.render("index", {
                 username: req.session.username
             });
@@ -50,9 +51,12 @@ module.exports = function(app) {
 // Load fav page 
     app.get("/favs", function (req, res) {
         if (req.session.username) {
-            res.render("favs", { 
-                usernameDisplay: "You are logged in as: " + req.session.username,
-                message: "Display the saved favs, or something saying no favs have been saved."});
+            db.Favs.findAll().then(function (dbFavs) {
+                res.json(dbFavs);
+            });
+            // res.render("favs", { 
+            //     usernameDisplay: "You are logged in as: " + req.session.username,
+            //     message: "Display the saved favs, or something saying no favs have been saved."});
         }
         else {
             res.render("favs", {message: "You are not logged in, if you would like to look at favs please log in"});
@@ -75,8 +79,14 @@ module.exports = function(app) {
             id: req.body.id
         };
         apiFetch(animalSearch).then((animalObj) => {
-            console.log(animalObj);
-            res.render("index", { animalObj });
+            if (req.session.username) {
+                res.render("index", {
+                    username: req.session.username,
+                    animalObj: animalObj
+                });
+            } else {
+                res.render("index", { animalObj });
+            }
         });
     });
 
