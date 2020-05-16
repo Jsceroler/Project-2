@@ -10,10 +10,10 @@
                     <ul class="list-unstyled">
                         <li><a href="/" class="text-white">Home</a></li>
                         <li><a href="/login" class="text-white">Login</a></li>
+                        <li><a href="/logout" class="text-white">Logout</a></li>
                         <li><a href="/register" class="text-white">Register</a></li>
                         <li><a href="/detail" class="text-white">Detail</a></li>
                         <li><a href="/favs" class="text-white">Favorites</a></li>
-
                     </ul>
                 </div>
             </div>
@@ -41,58 +41,48 @@
                 My life got flipped-turned upside down
                 And I'd like to take a minute
                 Just sit right there
-                I'll tell you how I became the prince of a town called Bel Air
-                In west Philadelphia born and raised
-                On the playground was where I spent most of my days
-                Chillin' out maxin' relaxin' all cool
-                And all shootin some b-ball outside of the school
-                When a couple of guys who were up to no good
-                Started making trouble in my neighborhood
-                I got in one little fight and my mom got scared
-                She said 'You're movin' with your auntie and uncle in Bel Air'
-                I begged and pleaded with her day after day
-                But she packed my suit case and sent me on my way
-                She gave me a kiss and then she gave me my ticket.
-                I put my Walkman on and said, 'I might as well kick it'.
-                First class, yo this is bad
-                Drinking orange juice out of a champagne glass.
-                Is this what the people of Bel-Air living like?
-                Hmm this might be alright.
-                But wait I hear they're prissy, bourgeois, all that
-                Is this the type of place that they just send this cool cat?
-                I don't think so
-                I'll see when I get there
-                I hope they're prepared for the prince of Bel-Air
-                Well, the plane landed and when I came out
-                There was a dude who looked like a cop standing there with my name out
-                I ain't trying to get arrested yet
-                I just got here
-                I sprang with the quickness like lightning, disappeared
-                I whistled for a cab and when it came near
-                The license plate said fresh and it had dice in the mirror
-                If anything I could say that this cab was rare
-                But I thought 'Nah, forget it' - 'Yo, homes to Bel Air'
-                I pulled up to the house about seven or eigth
-                And I yelled to the cabbie 'Yo homes smell ya later'
-                I looked at my kingdom
-                I was finally there
-                To sit on my throne as the Prince of Bel Air</p>
+                I'll tell you how I became the prince of a town called Bel Air</p>
             <p>
-                <form class="pet-form" action="/" method="post">
-                    <div class="form-group">
-                        <label for="animal"><strong>Animal</strong></label>
-                        <select id="animal" name="animal" class="form-control form-control-lg mb-3">
-                            <option value="cat">Cat</option>
-                            <option value="dog">Dog</option>
-                            <option value="bird">Bird</option>
-                            <option value="rabbit">Rabbit</option>
-                        </select>
-                        <label for="zipcode">zipcode:</label>
-                        <input type="text" id="zip" name="zip" class="form-control form-control-lg"
-                            placeholder="Enter your zipcode" pattern="[0-9]{5}" title="Five digit zip code">
-                        <input type="submit" value="Find" class="btn btn-dark btn-lg btn-block mt-3">
-                    </div>
-                </form>
+            <form class="pet-form" actions="/" method="POST">
+                <div class="form-group">
+                    <label for="animal"><strong>Animal</strong></label><br />
+                    <select id="animal" name="animal" class="form-control form-control-lg mb-3" required>
+                        <option value="cat">Cat</option>
+                        <option value="dog">Dog</option>
+                        <option value="bird">Bird</option>
+                        <option value="rabbit">Rabbit</option>
+                    </select><br />
+                    <label for="size"><strong>Size</strong></label><br />
+                    <input name="size" value="small" type="checkbox" /> Small<br />
+                    <input name="size" value="medium" type="checkbox" /> Medium<br />
+                    <input name="size" value="large" type="checkbox" /> Large<br />
+                    <input name="size" value="xlarge" type="checkbox" /> XLarge<br />
+                    <label for="gender"><strong>Gender</strong></label><br />
+                    <input name="gender" value="female" type="checkbox" /> Female <br />
+                    <input name="gender" value="male" type="checkbox" /> Male <br />
+                    <input name="gender" value="unknown" type="checkbox" value="1"> Unknown <br />
+                    <label for="age"><strong>Age</strong></label><br />
+                    <input name="age" value="baby" type="checkbox" />Baby<br />
+                    <input name="age" value="young" type="checkbox" />Young<br />
+                    <input name="age" value="adult" type="checkbox" />Adult<br />
+                    <input name="age" value="senior" type="checkbox" />Senior<br />
+                    <label for="coat"><strong>Coat</strong></label><br />
+                    <input name="coat" value="short" type="checkbox" />Short<br />
+                    <input name="coat" value="medium" type="checkbox" />Medium<br />
+                    <input name="coat" value="long" type="checkbox" />Long<br />
+                    <input name="coat" value="wire" type="checkbox" />Wire<br />
+                    <input name="coat" value="hairless" type="checkbox" />Hairless<br />
+                    <input name="coat" value="curly" type="checkbox" />Curly<br />
+                    <input name="goodwithchildren" value="true" type="checkbox"><strong>Good with
+                        children</strong><br />
+                    <input name="goodwithdogs" value="true" type="checkbox"><strong>Good with dogs</strong><br />
+                    <input name="goodwithcats" value="true" type="checkbox"><strong>Good with cats</strong><br />
+                    <label for="zipcode">Zipcode:</label><br />
+                    <input type="text" id="zip" name="zip" class="form-control form-control-lg"
+                        placeholder="Enter your zipcode" pattern="[0-9]{5}" title="Five digit zip code">
+                    <button type="submit" class="btn btn-dark btn-lg btn-block mt-3">Search</button>
+                </div>
+            </form>
             </p>
         </div>
     </section>
@@ -129,35 +119,6 @@
                         </div>
                     </div>
                 </div>
-                {{else}}
-
-                <div class="col-md-4">
-
-                    <div class="card mb-4 box-shadow">
-
-                        <img class="card-img-top" src="logo.png" alt="Card image cap">
-                        <div class="card-body">
-                            <p class="card-text">
-                                <ul class="list-group">
-                                    <li class="list-group-item">Age: {{age}}</li>
-                                    <li class="list-group-item">Gender: {{gender}}</li>
-                                    <li class="list-group-item">Size: {{size}}</li>
-                                    <li class="list-group-item">Email: {{contact.email}}</li>
-                                    <li class="list-group-item">Phone: {{contact.phone}}</li>
-                                    <li class="list-group-item">Shelter ID: {{organization_id}}</li>
-                                </ul>
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{/if}}
                 {{/each}}
             </div>
         </div>
@@ -172,44 +133,3 @@
         </p>
     </div>
 </footer>
-</div>
-</div>
-
-<form class="pet-form" actions="/" method="POST">
-    <div class="form-group">
-        <label for="animal"><strong>Animal</strong></label><br />
-        <select id="animal" name="animal" class="form-control form-control-lg mb-3" required>
-            <option value="cat">Cat</option>
-            <option value="dog">Dog</option>
-            <option value="bird">Bird</option>
-            <option value="rabbit">Rabbit</option>
-        </select><br />
-        <label for="size"><strong>Size</strong></label><br />
-        <input name="size" value="small" type="checkbox" /> Small<br />
-        <input name="size" value="medium" type="checkbox" /> Medium<br />
-        <input name="size" value="large" type="checkbox" /> Large<br />
-        <input name="size" value="xlarge" type="checkbox" /> XLarge<br />
-        <label for="gender"><strong>Gender</strong></label><br />
-        <input name="gender" value="female" type="checkbox" /> Female <br />
-        <input name="gender" value="male" type="checkbox" /> Male <br />
-        <input name="gender" value="unknown" type="checkbox" value="1"> Unknown <br />
-        <label for="age"><strong>Age</strong></label><br />
-        <input name="age" value="baby" type="checkbox" />Baby<br />
-        <input name="age" value="young" type="checkbox" />Young<br />
-        <input name="age" value="adult" type="checkbox" />Adult<br />
-        <input name="age" value="senior" type="checkbox" />Senior<br />
-        <label for="coat"><strong>Coat</strong></label><br />
-        <input name="coat" value="short" type="checkbox" />Short<br />
-        <input name="coat" value="medium" type="checkbox" />Medium<br />
-        <input name="coat" value="long" type="checkbox" />Long<br />
-        <input name="coat" value="wire" type="checkbox" />Wire<br />
-        <input name="coat" value="hairless" type="checkbox" />Hairless<br />
-        <input name="coat" value="curly" type="checkbox" />Curly<br />
-        <input name="goodwithchildren" value="true" type="checkbox"><strong>Good with children</strong><br />
-        <input name="goodwithdogs" value="true" type="checkbox"><strong>Good with dogs</strong><br />
-        <input name="goodwithcats" value="true" type="checkbox"><strong>Good with cats</strong><br />
-        <label for="zipcode">Zipcode:</label><br />
-        <input type="text" id="zip" name="zip" class="form-control form-control-lg" placeholder="Enter your zipcode"
-            pattern="[0-9]{5}" title="Five digit zip code">
-        <button type="submit" class="btn btn-dark btn-lg btn-block mt-3">
-    </div>
