@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Fav = sequelize.define("Fav", {
+    var Favs = sequelize.define("Favs", {
         username: {
             type: DataTypes.STRING,
             allowNull: false
@@ -11,5 +11,5 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         timestamps: false
     });
-    return Fav;
+    return Favs;
 };

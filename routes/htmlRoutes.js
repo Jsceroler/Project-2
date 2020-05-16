@@ -5,8 +5,15 @@ require("dotenv").config();
 
 module.exports = function (app) {
     // Load index page
-    app.get("/", function (req, res) {
-        res.render("index");
+    app.get("/", function(req, res) {
+        if (req.session.username) {
+            console.log(req.session.username);
+            res.render("index", {
+                username: req.session.username
+            });
+        } else {
+            res.render("index");
+        }
     });
 
     // Load login page
@@ -21,7 +28,13 @@ module.exports = function (app) {
         }
     });
 
-    // Load register page 
+    // Logout
+    app.get("/logout", function(req, res){
+        req.session.destroy();
+        res.redirect("/");
+    });
+
+// Load register page 
     app.get("/register", function (req, res) {
         if (req.session.username) {
             res.render("index", { message: "You are already logged in! If you want to create a new account please log out first." })
@@ -38,13 +51,13 @@ module.exports = function (app) {
     // Load fav page 
     app.get("/favs", function (req, res) {
         if (req.session.username) {
-            res.render("favs", {
+            db.Favs.findAll().then(function (dbFavs) {
+            res.render("favs", { 
                 usernameDisplay: "You are logged in as: " + req.session.username,
-                message: "Display the saved favs, or something saying no favs have been saved."
+                favs: dbFavs});
             });
-        }
-        else {
-            res.render("favs", { message: "You are not logged in, if you would like to look at favs please log in" });
+        } else {
+            res.render("favs", {message: "You are not logged in, if you would like to look at favs please log in"});
         }
     });
 
@@ -53,7 +66,6 @@ module.exports = function (app) {
     app.post("/", function (req, res) {
         let animalSearch = {
             type: req.body.animal,
-            // key value set up for the other search params
             size: valueCheck(req.body.size),
             gender: valueCheck(req.body.gender),
             age: valueCheck(req.body.age),
@@ -61,11 +73,18 @@ module.exports = function (app) {
             good_with_children: req.body.good_with_children,
             good_with_dogs: req.body.goodwithdogs,
             good_with_cats: req.body.goodwithcats,
-            location: req.body.zip
+            location: req.body.zip,
+            id: req.body.id
         };
         apiFetch(animalSearch).then((animalObj) => {
-            console.log(animalObj);
-            res.render("index", { animalObj });
+            if (req.session.username) {
+                res.render("index", {
+                    username: req.session.username,
+                    animalObj: animalObj
+                });
+            } else {
+                res.render("index", { animalObj });
+            }
         });
     });
 
@@ -97,7 +116,6 @@ function fetchAnimals(params, token) {
     // fetch pets
     // get data using the token
     const query = qs.stringify(params);
-    console.log(query);
     return fetch(
         `https://api.petfinder.com/v2/animals/?${query}&limit=6`,
         // search query URL that will use all the params

@@ -4,7 +4,8 @@
 const db = require("../models");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-//salt round => cost factor controls how much time is needed to calculate a single bCrypt hash. higher cost factor -> more hashing rounds. Salt is a random value, store hash-string, also stores the saltn no less that 12 for production ready code. 
+
+//salt round => cost factor controls how much time is needed to calculate a single bCrypt hash. higher cost factor -> more hashing rounds. Salt is a random value, store hash-string, also stores the saltn no less that 12 for production ready code.
 
 // Routes
 module.exports = function (app) {
@@ -22,10 +23,7 @@ module.exports = function (app) {
                     if (result == true) {
                         console.log("logged in as " + req.body.username);
                         req.session.username = req.body.username;
-                        res.render("index", {
-                            message: "Logged in as: ",
-                            username: req.session.username
-                        });
+                        res.redirect("/");
                     } else {
                         res.render("login", {message: "The username or password you entered does not match an existing account."});
                     }
