@@ -24,22 +24,6 @@ $(".fa-star").click(function() {
             }
         )
     }
-    // else {
-    //     $(this).attr("data-state", "false");
-
-    //     $.ajax("/favs", {
-    //         type: "DELETE",
-    //         data: petId
-    //     }).then(
-    //         function(res){
-    //         }
-    //     ).fail(
-    //         function(err){
-    //             alert("You need to log in to save as fav");
-    //         }
-    //     )
-
-    // }
 })
 
 $(".delete").click(function() {
