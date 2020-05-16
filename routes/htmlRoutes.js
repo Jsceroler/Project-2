@@ -43,17 +43,12 @@ module.exports = function (app) {
         }
     });
 
-    // Load detail page --Leaving this commented out since we probably won't use this--
-    // app.get("/detail", function (req, res) {
-    //     res.render("detail");
-    // });
-
     // Load fav page 
     app.get("/favs", function (req, res) {
         if (req.session.username) {
             db.Favs.findAll().then(function (dbFavs) {
             res.render("favs", { 
-                usernameDisplay: "You are logged in as: " + req.session.username,
+                username: req.session.username,
                 favs: dbFavs});
             });
         } else {
