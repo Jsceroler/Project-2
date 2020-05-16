@@ -1,26 +1,36 @@
-# Unit 17: Project 2 Continued
+# Barks & Whiskers
 
 ## Overview
-Welcome to Project 2! This is yet another important milestone in your full-stack journey: designing and building your first full-stack web application. You and your team will design and build an app using the MVC paradigm and your own server-side API. You will also continue to add to your professional repertoire with testing, continuous integration and linting tools.
+Barks and Whiskers is an app for users to find adoptable pets based on their specific wants. The app will have a variety of search parameters that will pull data from Petfinder API. 
 
-## Key Topics
-* Linting
-* Continuous integration
-* Testing
+[Link to page]()
 
-## Comprehension Check
-You will be employer-ready if you can answer the following questions:
-1. Why is TDD?
-2. What is linting?
-3. What is continuous integration?
+![](views/images/logo.png)
 
-## Learning Objectives
-You will be employer-competitive if you are able to:
-* Configure linting and continuous integration with Travis CI.
-* Explain and implement unit tests
-* Design, build and deploy a full-stack web application to Heroku
+## How to Use
+A user can use search for an animal using whatever search parameters they prefer. The search will run, using the Petfinder API to find adoptable animals within 100 miles of the User. The first 6 options will be returned to the page. If the user wishes to save any animal they found, and have the option to view the information later, the user can register a username and password. 
 
-## Helpful Links
-[Mocha JS Docs](https://mochajs.org/)
-[Chai JS Docs](https://www.chaijs.com/)
-[Agile Methodology](https://en.wikipedia.org/wiki/Agile_software_development)
+Each animal card has a favorites button, when clicked it will save the pet information to the user that is logged in. If no user is logged in, the user will be alerted that they need to be logged in to save a favorite. 
+
+## Tech Used
+ 
+ - HTML
+ - Visual Studios
+ - JavaScript
+ - Node.js
+ - Express
+ - Express-Sessions
+ - bcrypt 
+ - fetch 
+ - PetFinder API
+ - Handlebars
+ - qa 
+
+### Development Team
+Front-End
+- Britney
+- Travis
+
+Back-End
+- Aldo
+- Reeka
