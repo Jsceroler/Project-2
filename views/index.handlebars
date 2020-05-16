@@ -1,50 +1,63 @@
 <main role="main">
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Barks and Whiskers</h1>
             <img src="logo.png" alt="Test">
-            <p class="lead text-muted"> Find your  </p>
+            <p class="lead text-muted"> Find your furrrrend </p>
             <p>
-            <form class="pet-form" actions="/" method="POST">
-                <div class="form-group">
-                    <label for="animal"><strong>Animal</strong></label><br />
-                    <select id="animal" name="animal" class="form-control form-control-lg mb-3" required>
-                        <option value="cat">Cat</option>
-                        <option value="dog">Dog</option>
-                        <option value="bird">Bird</option>
-                        <option value="rabbit">Rabbit</option>
-                    </select><br />
-                    <label for="size"><strong>Size</strong></label><br />
-                    <input name="size" value="small" type="checkbox" /> Small<br />
-                    <input name="size" value="medium" type="checkbox" /> Medium<br />
-                    <input name="size" value="large" type="checkbox" /> Large<br />
-                    <input name="size" value="xlarge" type="checkbox" /> XLarge<br />
-                    <label for="gender"><strong>Gender</strong></label><br />
-                    <input name="gender" value="female" type="checkbox" /> Female <br />
-                    <input name="gender" value="male" type="checkbox" /> Male <br />
-                    <input name="gender" value="unknown" type="checkbox" value="1"> Unknown <br />
-                    <label for="age"><strong>Age</strong></label><br />
-                    <input name="age" value="baby" type="checkbox" />Baby<br />
-                    <input name="age" value="young" type="checkbox" />Young<br />
-                    <input name="age" value="adult" type="checkbox" />Adult<br />
-                    <input name="age" value="senior" type="checkbox" />Senior<br />
-                    <label for="coat"><strong>Coat</strong></label><br />
-                    <input name="coat" value="short" type="checkbox" />Short<br />
-                    <input name="coat" value="medium" type="checkbox" />Medium<br />
-                    <input name="coat" value="long" type="checkbox" />Long<br />
-                    <input name="coat" value="wire" type="checkbox" />Wire<br />
-                    <input name="coat" value="hairless" type="checkbox" />Hairless<br />
-                    <input name="coat" value="curly" type="checkbox" />Curly<br />
-                    <input name="goodwithchildren" value="true" type="checkbox"><strong>Good with
-                        children</strong><br />
-                    <input name="goodwithdogs" value="true" type="checkbox"><strong>Good with dogs</strong><br />
-                    <input name="goodwithcats" value="true" type="checkbox"><strong>Good with cats</strong><br />
-                    <label for="zipcode">Zipcode:</label><br />
-                    <input type="text" id="zip" name="zip" class="form-control form-control-lg"
-                        placeholder="Enter your zipcode" pattern="[0-9]{5}" title="Five digit zip code">
-                    <button type="submit" class="btn btn-dark btn-lg btn-block mt-3">Search</button>
-                </div>
-            </form>
+                <form class="pet-form" actions="/" method="POST">
+                    <div class="form-group">
+                        <label for="animal"><strong>Animal</strong></label><br />
+                        <select id="animal" name="animal" class="form-control form-control-lg mb-3" required>
+                            <option value="cat">Cat</option>
+                            <option value="dog">Dog</option>
+                            <option value="bird">Bird</option>
+                            <option value="rabbit">Rabbit</option>
+                        </select><br />
+                        <label for="zipcode"><strong>Zipcode:</strong></label><br />
+                        <input type="text" id="zip" name="zip" class="form-control form-control-lg"
+                            placeholder="Enter your zipcode" pattern="[0-9]{5}" title="Five digit zip code" required><br />
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="size"><strong>Size</strong></label><br />
+                                <input name="size" value="small" type="checkbox" /> Small<br />
+                                <input name="size" value="medium" type="checkbox" /> Medium<br />
+                                <input name="size" value="large" type="checkbox" /> Large<br />
+                                <input name="size" value="xlarge" type="checkbox" /> XLarge<br />
+                            </div>
+                            <div class="col-md-2">
+                                <label for="gender"><strong>Gender</strong></label><br />
+                                <input name="gender" value="female" type="checkbox" /> Female <br />
+                                <input name="gender" value="male" type="checkbox" /> Male <br />
+                                <input name="gender" value="unknown" type="checkbox" value="1"> Unknown <br />
+                            </div>
+                            <div class="col-md-2">
+                                <label for="age"><strong>Age</strong></label><br />
+                                <input name="age" value="baby" type="checkbox" />Baby<br />
+                                <input name="age" value="young" type="checkbox" />Young<br />
+                                <input name="age" value="adult" type="checkbox" />Adult<br />
+                                <input name="age" value="senior" type="checkbox" />Senior<br />
+                            </div>
+                            <div class="col-md-2">
+                                <label for="coat"><strong>Coat</strong></label><br />
+                                <input name="coat" value="short" type="checkbox" />Short<br />
+                                <input name="coat" value="medium" type="checkbox" />Medium<br />
+                                <input name="coat" value="long" type="checkbox" />Long<br />
+                                <input name="coat" value="wire" type="checkbox" />Wire<br />
+                                <input name="coat" value="hairless" type="checkbox" />Hairless<br />
+                                <input name="coat" value="curly" type="checkbox" />Curly<br />
+                            </div>
+                            <div class="col-md-2">
+                                <input name="goodwithchildren" value="true" type="checkbox">Good with
+                                    children<br />
+                                <input name="goodwithdogs" value="true" type="checkbox">Good with
+                                    dogs<br />
+                                <input name="goodwithcats" value="true" type="checkbox">Good with
+                                    cats<br />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info btn-lg btn-block mt-3">Search</button>
+                    </div>
+                </form>
             </p>
         </div>
     </section>
